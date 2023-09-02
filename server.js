@@ -21,11 +21,6 @@ app.use("/komiku", komiku)
 app.use("/nanimex", nanimex)
 app.use("/kuramanime", kuramanime)
 app.use("/wibudesu", wibudesu)
-app.get("*", (req, res) => {
-    res.status(404).json({
-        message: "404 route not found"
-    })
-})
 
 app.get("/", (req, res) => {
     res.status(200).json({
@@ -39,6 +34,12 @@ app.get("/", (req, res) => {
             nanimex_url: process.env.NANIMEX_URL,
             wibudesu_url: process.env.WIBUDESU_URL,
         }
+    })
+})
+
+app.get("*", (req, res) => {
+    res.status(404).json({
+        message: "404 route not found"
     })
 })
 
