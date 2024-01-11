@@ -219,13 +219,30 @@ const detailComic = async (req, res) => {
     const table = $(right).find("table > tbody")
     
     const title = $(parent).find("div.seriestucon > div.seriestuhead > h1").text()
-    const titleAlt = $($(table).find("tr")[0]).find("td").last().text()
+    // const titleAlt = $($(table).find("tr")[0]).find("td").last().text()
+    let titleAlt = null
+    $(table).find("tr").each((i, e) => {
+        const td = $(e).find("td")
+        if(td.first().text() === "Alternative") titleAlt =  td.last().text()
+    })
     const description = $(parent).find("div.seriestucon > div.seriestuhead > div.entry-content.entry-content-single > p").text()
     const thumbnail = $(left).find("div.thumb > img").attr("src")
     const rating = $(left).find("div.rating > div.rating-prc > div.num").text()
-    const status = $(table.find("tr")[1]).find("td").last().text()
-    const type = $(table.find("tr")[2]).find("td").last().text()
-    const released = $(table.find("tr")[3]).find("td").last().text()
+    let status = null
+    $(table).find("tr").each((i, e) => {
+        const td = $(e).find("td")
+        if(td.first().text() === "Status") status = td.last().text()
+    })
+    let type = null
+    $(table).find("tr").each((i, e) => {
+        const td = $(e).find("td")
+        if(td.first().text() === "Type") type = td.last().text()
+    })
+    let released = null
+    $(table).find("tr").each((i, e) => {
+        const td = $(e).find("td")
+        if(td.first().text() === "Posted On") released = td.last().text() 
+    })
     const updated_at = $(table.find("tr")[table.find("tr").length - 1]).find("td").last().find("time").text()
 
     data.title = title

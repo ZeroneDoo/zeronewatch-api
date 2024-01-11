@@ -166,7 +166,7 @@ const scrapeEpisode = async (req, res) => {
         })
     })
 
-    return datas
+    return res.data
 }
 const scrapeSearchAnime = async (req, res) => {
     const $ = cheerio.load(res.data)

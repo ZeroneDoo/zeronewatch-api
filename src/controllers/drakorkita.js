@@ -12,10 +12,14 @@ const {
     scrapeDetailAllType,
 } = require('../scrapers/drakorkita')
 
+const headers = {
+    "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+}
+
 const seriesAll = async (req, res) => {
     try {
         const { page = 1 } = req.query
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?media_type=tv&page=${page}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?media_type=tv&page=${page}`, { headers })
 
         const datas = await scrapeSeries(req, axiosRequest)
 
@@ -35,7 +39,7 @@ const seriesAll = async (req, res) => {
 
 const seriesUpdated = async (req, res) => {
     try {
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}`, { headers })
 
         const datas = await scrapeSeriesUpdated(req, axiosRequest)
 
@@ -55,7 +59,7 @@ const seriesUpdated = async (req, res) => {
 const movieAll = async (req, res) => {
     try {
         const { page = 1 } = req.query
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?media_type=movie&page=${page}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?media_type=movie&page=${page}`, { headers })
 
         const datas = await scrapeMovie(req, axiosRequest)
 
@@ -75,7 +79,7 @@ const movieAll = async (req, res) => {
 
 const newMovie = async (req, res) => {
     try {
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}`, { headers })
 
         const datas = await scrapeNewMovie(req, axiosRequest)
 
@@ -95,7 +99,7 @@ const newMovie = async (req, res) => {
 const ongoingSeries = async (req, res) => {
     try {
         const { page = 1 } = req.query
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?status=returning&page=${page}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?status=returning&page=${page}`, { headers })
 
         const datas = await scrapeOngoingSeries(req, axiosRequest)
 
@@ -116,7 +120,7 @@ const ongoingSeries = async (req, res) => {
 const completedSeries = async (req, res) => {
     try {
         const { page = 1 } = req.query
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?status=ended&page=${page}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?status=ended&page=${page}`, { headers })
 
         const datas = await scrapeCompletedSeries(req, axiosRequest)
 
@@ -136,7 +140,7 @@ const completedSeries = async (req, res) => {
 
 const genres = async (req, res) => {
     try {
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}`, { headers })
 
         const datas = await scrapeGenres(req, axiosRequest)
 
@@ -157,7 +161,7 @@ const detailGenres = async (req, res) => {
     try {
         const { page = 1 } = req.query
         const { endpoint } = req.params
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?genre=${endpoint}&page=${page}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?genre=${endpoint}&page=${page}`, { headers })
 
         const datas = await scrapeDetailGenres({ page, endpoint }, axiosRequest)
 
@@ -178,7 +182,7 @@ const detailGenres = async (req, res) => {
 const searchAll = async (req, res) => {
     try {
         const { s ,page = 1 } = req.query
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?q=${s}&page=${page}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/all?q=${s}&page=${page}`, { headers })
 
         const datas = await scrapeSearch(req, axiosRequest)
 
@@ -201,7 +205,7 @@ const detailAllType = async (req, res) => {
     try {
         const { endpoint } = req.params
 
-        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/detail/${endpoint}`)
+        const axiosRequest = await axios.get(`${process.env.DRAKORKITA_URL}/detail/${endpoint}`, { headers })
 
         const data = await scrapeDetailAllType({ endpoint }, axiosRequest)
 

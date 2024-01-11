@@ -86,7 +86,7 @@ const detailEpisode = async (req, res) => {
         
         const actualUrl = await url.request.res.responseUrl
 
-        const axiosRequest = await axios.get(`${actualUrl}/episode/${eps}?activate_stream=1`)
+        const axiosRequest = await axios.get(`${actualUrl}/episode/${eps}?activate_stream=`)
         
         const datas = await scrapeEpisode({ anime, eps }, axiosRequest)
 
